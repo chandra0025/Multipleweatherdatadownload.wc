@@ -1,0 +1,5 @@
+steps:
+1. Download spuder application from ( https://www.spyder-ide.org )
+2. Copy the code from code.txt file and paste in the Documents of your computer, after creation of this keep in the Documents
+3. now download the CCEdataGT.xlsx (you can rename this files, if changed please change the name in the code) change or put the lat long values in the respected field and place this in the documents.
+4. now save and run the code, for multiple downloads in one go.  

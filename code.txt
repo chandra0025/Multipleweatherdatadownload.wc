@@ -1,0 +1,50 @@
+# -*- coding: utf-8 -*-
+"""
+Spyder Editor
+
+This is a temporary script file.
+"""
+import pandas as pd
+import json
+import requests
+import os
+
+df = pd.read_excel('./CCEdataGT.xlsx')
+json_data = df.to_json(orient="records")
+json_d = json.loads(json_data)
+def download_file(url, filename):
+    ''' Downloads file from the url and save it as filename '''
+    # check if file already exists
+    print(os.path)
+    if not os.path.isfile(filename):
+        print('Downloading File')
+        response = requests.get(url)
+        # Check if the response is ok (200)
+        if response.status_code == 200:
+            # Open file and write the content
+            with open(filename, 'wb') as file:
+                # A chunk of 128 bytes
+                for chunk in response:
+                    file.write(chunk)
+    else:
+        print('File exists')
+
+for i in json_d: 
+    lat = i['Lat']
+    Long = i['Long']
+    url = 'https://power.larc.nasa.gov/api/temporal/daily/point?parameters=ALLSKY_SFC_SW_DWN,T2M_MIN,T2M_MAX,PRECTOTCORR&community=AG&longitude='+str(Long)+'&latitude='+str(lat)+'&start=20220101&end=20230830&format=CSV&user=DAV'
+    download_file(url, str(i['ID'])+'.csv')
+
+
+
+
+
+#with requests.Session() as s:
+ #   download = s.get(url)
+
+  #  decoded_content = download.content.decode('utf-8')
+    
+   # cr = csv.reader(decoded_content.splitlines(), delimiter=',')
+   # my_list = list(cr)
+    #for row in my_list:
+     #   print(row)
